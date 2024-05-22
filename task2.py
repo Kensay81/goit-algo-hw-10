@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import scipy.integrate as spi
 
-# Визначення нової функції та межі інтегрування
+# Визначення функції та межі інтегрування
 def f(x):
     return np.sin(x) * np.exp(-x/2)
 
@@ -39,7 +39,8 @@ plt.show()
 
 # Обчислення інтеграла з використанням scipy
 result, error = spi.quad(f, a, b)
-print("Result using quad: ", result)
+print("Результат при використанні аналітичного метода (quad) : ", result)
+print(f"Похибка аналітичного обчислення: {error:.2e}")
 
 # Метод Монте-Карло для обчислення інтеграла
 x_random = np.random.uniform(a, b, 10000)
@@ -47,4 +48,6 @@ y_random = f(x_random)
 
 # Обчислення значення інтегралу
 integral_value = (b - a) * np.mean(y_random)
-print("Result using Monte-Carlo method: ", integral_value)
+print("Результат при використанні метода Монте-Карло: ", integral_value)
+
+print(f"Різниця між результатами: {abs(integral_value - result):.6f}")
